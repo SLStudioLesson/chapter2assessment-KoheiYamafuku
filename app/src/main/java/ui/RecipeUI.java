@@ -41,6 +41,7 @@ public class RecipeUI {
                         break;
                     case "2":
                         // 設問2: 新規登録機能
+                        addNewRecipe();
                         break;
                     case "3":
                         // 設問3: 検索機能
@@ -97,11 +98,11 @@ public class RecipeUI {
      */
     private void addNewRecipe() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Enter recipe name:");
+        System.out.print("Enter recipe name: ");
         String recipeName = reader.readLine();
-        System.out.print("Enter main ingredients (comma separated):");
+        System.out.print("Enter main ingredients (comma separated): ");
         String ingredients = reader.readLine();
-        System.out.println("Recipe added successfully.");
+        
         //addRecipeに渡して、ファイルに書き込む
         fileHandler.addRecipe(recipeName, ingredients);
     }
@@ -119,18 +120,23 @@ public class RecipeUI {
 
         //コンソールへの書き込み部分
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter search query (e.g., 'name=Tomato&ingredient=Garlic'): ");
+        System.out.print("Enter search query (e.g., 'name=Tomato&ingredient=Garlic'): ");
         String line = reader.readLine();
         
         String[] array = line.split("=");
         String[] keyword = array[1].split("&");
+        //何も表示されなかったら、このカウントが０のまま
         int count = 0;
         System.out.println("Search Results:");
-        //for文で回しながら、一致する結果を探す。
+        
+        /*for文で回しながら、一致する結果を探す。
+        入れ子してlistがiの時にキーワード配列を周回して探していく
+        */
         
         for(int i = 0; i < list.size(); i++){
            for(int y = 0; y < keyword.length; y++){
-            if(list.get(i).matches(keyword[y])){
+
+            if(list.get(i).contains(keyword[y])){
                 System.out.println(list.get(i));
                 count++;
                 break;

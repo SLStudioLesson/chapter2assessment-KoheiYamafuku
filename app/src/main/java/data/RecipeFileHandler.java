@@ -51,11 +51,10 @@ public class RecipeFileHandler {
      */
     //
     public void addRecipe(String recipeName, String ingredients) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath))) {
-            //書き込ませ方わすれました
-              String writeString = "food=" + favorite1 + "&" + "country=" + favorite2;
-            writer.write(writeString);
-
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath,true))) {
+            writer.write(recipeName + " ");
+            writer.write(ingredients);
+            System.out.println("Recipe added successfully.");
         } catch (IOException e) {
 
         }
