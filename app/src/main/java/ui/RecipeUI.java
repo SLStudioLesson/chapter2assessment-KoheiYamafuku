@@ -70,8 +70,8 @@ public class RecipeUI {
         //読み込んだレシピをリストで返してくれるメソッドを代入
         list = fileHandler.readRecipes();
 
-        System.out.println("Recipes:");
-        if (list != null) {
+        
+        
             for (String ans : list) {
                 System.out.println("-----------------------------------");
                 //,で切り取って格納する
@@ -85,10 +85,8 @@ public class RecipeUI {
                 }
                 System.out.println();
             }
-        } else {
-            System.out.println(" No recipes available.");
-        }
-    }
+        } 
+    
 
     /**
      * 設問2: 新規登録機能
@@ -128,7 +126,7 @@ public class RecipeUI {
         //何も表示されなかったら、このカウントが０のまま
         int count = 0;
         System.out.println("Search Results:");
-        
+
         /*for文で回しながら、一致する結果を探す。
         入れ子してlistがiの時にキーワード配列を周回して探していく
         */

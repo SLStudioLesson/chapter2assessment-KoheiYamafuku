@@ -27,13 +27,20 @@ public class RecipeFileHandler {
      */
     public ArrayList<String> readRecipes() {
         ArrayList<String> list = new ArrayList<>();
+
         // ファイルの読み込み
         try (BufferedReader reader = new BufferedReader(new FileReader(this.filePath))) {
             String line;
-           
+
+            System.out.println("Recipes:");
+            // fileが空だったら、No recipes available.を出力する。
             // 最後の一行になるまで読み込み続ける
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
+            if (reader.readLine() != null) {
+                while ((line = reader.readLine()) != null) {
+                    list.add(line);
+                }
+            } else {
+                System.out.println("No recipes available.");
             }
         } catch (IOException e) {
             System.out.println("Error reading file:" + e.getMessage());
@@ -51,7 +58,7 @@ public class RecipeFileHandler {
      */
     //
     public void addRecipe(String recipeName, String ingredients) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath,true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath, true))) {
             writer.write(recipeName + " ");
             writer.write(ingredients);
             System.out.println("Recipe added successfully.");
